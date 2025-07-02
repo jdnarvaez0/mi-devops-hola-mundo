@@ -1,0 +1,22 @@
+name: Deploy Hola Mundo to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Ejecuta el workflow cada vez que haya un push a la rama 'main'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # Elige el sistema operativo para ejecutar el job
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Paso para clonar tu repositorio
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3 # Acción de terceros para desplegar en GitHub Pages
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Token de GitHub, proporcionado automáticamente
+          publish_dir: . # La carpeta que contiene los archivos a desplegar (en este caso, todo el repo)
+          # Puedes especificar una rama diferente para desplegar, por ejemplo:
+          # publish_branch: gh-pages # Desplegará en la rama 'gh-pages'
